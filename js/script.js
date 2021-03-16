@@ -9,23 +9,25 @@ Dopo che sono stati inseriti i 5 numeri, il software dice quanti e quali dei num
 
 $(function() {
 //Un alert() espone 5 numeri generati casualmente.
-var numeriGenerati = generatoreNumeri(1, 20, 5);
-alert(numeriGenerati);
-console.log(numeriGenerati);
+var numeriGenerati = generatoreNumeri(1, 100, 5);
+alert("Memorizza questi numeri: \n" + numeriGenerati);
+// console.log(numeriGenerati);
 
-
-var secondi = 5;
+// Imposto i secondi di countdown con una variabile per fermare il setInterval()
+var secondi = 30;
 var countDown = setInterval(function () {
   console.log(secondi);
-  if (secondi <=0) {
+  // se il timer arriva a 0
+  if (secondi == 0) {
     clearInterval(countDown);
 
     var arrayUtente = [];
     var arrayUtenteGiusti = [];
 
-
+    // chiedo all'utente di inserire i numeri
     for (var i = 0; i < 5; i++) {
       var numeroUtente = parseInt(prompt("Inserisci i numeri che hai appena visto"));
+      // controlli sul prompt
       if ( isNaN(numeroUtente)) {
         alert("Attenzione! inserisci un numero!");
         i-=1;
@@ -33,17 +35,17 @@ var countDown = setInterval(function () {
         alert("Attenzione! Hai già inserito questo numero!");
         i-=1;
       } else {
-
+        // pusho i numeri del prompt in un array dell'utente
         arrayUtente.push(numeroUtente);
 
         var trovato = trovaInArray(numeriGenerati, numeroUtente);
-
+        // controllo se il numero inserito dall'utente coincide con uno dei numeri dell'array generato dalla cpu
         if (trovato) {
           arrayUtenteGiusti.push(numeroUtente);
         }
       }
     }
-
+    // messaggio per l'utente
     alert("Hai indovinato " + arrayUtenteGiusti.length + " numeri! \nQuesti sono i numeri indovinati: " + arrayUtenteGiusti);
   } else {
     secondi-= 1;
